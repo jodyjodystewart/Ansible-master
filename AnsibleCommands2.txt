@@ -1,0 +1,11 @@
+An example of ~roles/basic/tasks/main.yml with installing multiple packages in Fedora or RedHat:
+
+- name:  "Installing Multiple Packages"  #This is just text.  Not important
+  yum:  pkg={{ item }} state=installed
+  with_items:
+  - dnsutils
+  - git
+  - vim
+  - ntp
+  - at
+  - lvm2

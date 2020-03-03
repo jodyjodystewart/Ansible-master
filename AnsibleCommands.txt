@@ -1,0 +1,37 @@
+ansible -m shell -a 'whoami' all
+
+ansible -m shell -a 'whoami' servers
+
+
+ansible -m ping all
+ansible -m ping servers
+
+ansible -b -K -m user -a 'name=testuser state=absent' all
+
+Playbooks:
+
+ansible-playbook -K playbook.yml
+
+Example of the contents of a playbook.yml file:
+
+---
+- hosts: all
+  become: true
+  roles:
+  - basic
+
+Example of the contents of ~roles/basic/tasks/main.yml
+
+- name:  "Installing VIM"
+  yum:  pkg=vim state=installed
+
+- name:  "Installing Zorba"
+  yum:  pkg=zorba state=installed
+
+
+- name:  "Installing GIT"
+  yum:  pkg=git state=installed
+
+
+
+

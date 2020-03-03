@@ -1,0 +1,16 @@
+---
+- hosts: test2
+  remote_user: vagrant
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Insert New Line
+      blockinfile:
+        path: /etc/snmp/snmpd.conf
+        insertafter: "rocommunity"
+        content: |
+           rocommunity private 192.168.200.0/24
+
+    - name: Restart SNMPD Service
+      action: service name=snmpd state=restarted
+
